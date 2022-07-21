@@ -1,3 +1,5 @@
 #Tomcat publish data
-#Wed Jul 20 14:29:19 KST 2022
+#Thu Jul 21 12:12:32 KST 2022
+org.eclipse.jst.jee.server\:pro22=C\:\\apache-tomcat-9\\wtpwebapps\\pro22
+org.eclipse.jst.jee.server\:pro23=C\:\\apache-tomcat-9\\wtpwebapps\\pro23
 org.eclipse.jst.jee.server\:pro21=C\:\\apache-tomcat-9\\wtpwebapps\\pro21

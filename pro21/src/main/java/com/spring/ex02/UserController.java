@@ -77,37 +77,51 @@ public class UserController extends MultiActionController {
 	}
 	
 
-	private  String getViewName(HttpServletRequest request) throws Exception {
-	      String contextPath = request.getContextPath();
-	      String uri = (String)request.getAttribute("javax.servlet.include.request_uri");
-	      if(uri == null || uri.trim().equals("")) {
-	         uri = request.getRequestURI();
-	      }
+    private  String getViewName(HttpServletRequest request) throws Exception {
+        // request 객체에서 URL요청명을 가져와 .do를 제외한 요청을 구한다.
+       String contextPath = request.getContextPath();
+       System.out.println("contexPath : " + contextPath);
+        
+       
+       String uri = (String)request.getAttribute("javax.servlet.include.request_uri");
+       System.out.println("uri : " + uri);        
+       
+       
+       if(uri == null || uri.trim().equals("")) {
+           uri = request.getRequestURI();
+        }
 
-	      int begin = 0;
-	      if(!((contextPath==null)||("".equals(contextPath)))){
-	         begin = contextPath.length();
-	      }
+       System.out.println("uri : " + uri);   
+       
+       int begin = 0;
+       if(!((contextPath==null)||("".equals(contextPath)))){
+            begin = contextPath.length();
+           System.out.println("begin : " + begin);   
+        }
 
-	      int end;
-	      if(uri.indexOf(";")!=-1){
-	         end=uri.indexOf(";");
-	      }else if(uri.indexOf("?")!=-1){
-	         end=uri.indexOf("?");
-	      }else{
-	         end=uri.length();
-	      }
+       int end;
+       if(uri.indexOf(";")!=-1){
+           end=uri.indexOf(";");
+        }else if(uri.indexOf("?")!=-1){
+           end=uri.indexOf("?");
+        }else{
+           end=uri.length();
+        }
+       
+        System.out.println("end : " + end);   
 
-	      String fileName=uri.substring(begin,end);
-	      if(fileName.indexOf(".")!=-1){
-	         fileName=fileName.substring(0,fileName.lastIndexOf("."));
-	      }
-	      if(fileName.lastIndexOf("/")!=-1){
-	         fileName=fileName.substring(fileName.lastIndexOf("/"),fileName.length());
-	      }
-	      return fileName;
-	   }
 
-	
+        String fileName=uri.substring(begin,end);
+        if(fileName.indexOf(".")!=-1){
+           fileName=fileName.substring(0,fileName.lastIndexOf("."));
+        }
+        if(fileName.lastIndexOf("/")!=-1){
+           fileName=fileName.substring(fileName.lastIndexOf("/"),fileName.length());
+        }
+        
+          System.out.println("fileName : " + fileName);   
+          return fileName;
+        }
+
 	
 }
