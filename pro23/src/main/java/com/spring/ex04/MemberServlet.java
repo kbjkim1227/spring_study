@@ -94,24 +94,24 @@ public class MemberServlet extends HttpServlet {
           nextPage="test03/listMembers.jsp";
        }else if(action.equals("foreachSelect")) {
 		  List<String> nameList = new ArrayList<String>();
-		  nameList.add("È«±æµ¿");
-		  nameList.add("Â÷¹ü±Ù");
-		  nameList.add("ÀÌ¼ø½Å");
+		  nameList.add("í™ê¸¸ë™");
+		  nameList.add("ì°¨ë²”ê·¼");
+		  nameList.add("ì´ìˆœì‹ ");
 		  List<MemberVO> membersList=dao.foreachSelect(nameList);
 		  request.setAttribute("membersList",membersList);
 		  nextPage="test03/listMembers.jsp";
 	   }else if(action.equals("foreachInsert")) {
           List<MemberVO> memList = new ArrayList<MemberVO>();
-          memList.add(new MemberVO("m1", "1234", "¹Ú±æµ¿", "m1@test.com"));
-          memList.add(new MemberVO("m2", "1234", "ÀÌ±æµ¿", "m2@test.com"));
-          memList.add(new MemberVO("m3", "1234", "±è±æµ¿", "m3@test.com"));
+          memList.add(new MemberVO("m1", "1234", "ë°•ê¸¸ë™", "m1@test.com"));
+          memList.add(new MemberVO("m2", "1234", "ì´ê¸¸ë™", "m2@test.com"));
+          memList.add(new MemberVO("m3", "1234", "ê¹€ê¸¸ë™", "m3@test.com"));
           int result=dao.foreachInsert(memList);
           nextPage="/mem4.do?action=listMembers";
 	    }else if(action.equals("selectLike")) {
-	      String name="±æµ¿";
+	      String name="ê¸¸ë™";
 		  List<MemberVO> membersList=dao.selectLike(name);
 		  request.setAttribute("membersList",membersList);
-		  nextPage="test03/listMembers.jsp";
+		  nextPage="test03/listMembers.jsp";	
 	   }
 		
 	   RequestDispatcher dispatch = request.getRequestDispatcher(nextPage);  

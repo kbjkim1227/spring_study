@@ -23,12 +23,12 @@ public class MemberServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
 		MemberDAO dao = new MemberDAO();
-		//String name = dao.selectName();
+		String name = dao.selectName();
 		int pwd = dao.selectPwd();
 		PrintWriter pw = response.getWriter();
 		pw.write("<script>");
-		//pw.write("alert(' ¿Ã∏ß: " + name +"');");
-		pw.write("alert(' ∫Òπ–π¯»£ : "+ pwd+"');");
+		pw.write("alert(' Ïù¥Î¶Ñ : " + name +"');");
+		pw.write("alert(' ÎπÑÎ∞ÄÎ≤àÌò∏ : "+ pwd+"');");
 		pw.write("</script>");
 
 	}

@@ -22,7 +22,7 @@
       <td><b>이름</b></td>
       <td><b>이메일</b></td>
       <td><b>가입일</b></td>
-      <!-- <td><b>삭제</b></td> -->
+      <td><b>삭제</b></td>
    </tr>
    
  <c:forEach var="member" items="${membersList}" >     
@@ -32,11 +32,15 @@
       <td>${member.name}</td>
       <td>${member.email}</td>
       <td>${member.joinDate}</td>
-      <%-- <td><a href="${contextPath}/mem4.do?action=deleteMember&id=${member.id }">삭제하기</a></td> --%>
+<td><a href="${contextPath}/mem4.do?action=deleteMember&id=${member.id }">삭제하기</a></td>
       
     </tr>
   </c:forEach>   
 </table>
-<a  href="${contextPath}/member/memberForm.do"><h1 style="text-align:center">회원가입</h1></a>
+<h1 style="text-align:center">
+<a  href="${contextPath}/test03/memberForm.jsp" style="background-color: green">회원가입</a>
+<a  href="${contextPath}/test03/modMember.jsp" style="background-color: blue" >수정하기</a>
+<a  href="${contextPath}/test03/searchMember.jsp" style="background-color: red">검색</a>
+</h1>
 </body>
 </html>

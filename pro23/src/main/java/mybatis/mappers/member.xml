@@ -105,12 +105,12 @@
       order by joinDate desc
   </select>
   
- <!--  
+  
    <sql id="a">
     <![CDATA[
       select * from t_member
      ]]> 
-   </sql>  -->  
+   </sql> 
   
 <!--    
   <select id="searchMember" parameterType="memberVO" resultMap="memResult">
