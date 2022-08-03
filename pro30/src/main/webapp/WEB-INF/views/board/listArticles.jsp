@@ -29,7 +29,7 @@
 </script>
 <body>
 <table align="center" border="1"  width="80%"  >
-  <tr height="10" align="center"  bgcolor="lightgreen">
+  <tr height="10" align="center"  bgcolor="hotpink">
      <td >글번호</td>
      <td >작성자</td>              
      <td >제목</td>
@@ -48,9 +48,9 @@
   <c:when test="${articlesList !=null }" >
     <c:forEach  var="article" items="${articlesList }" varStatus="articleNum" >
      <tr align="center">
-	<td width="5%">${articleNum.count}</td>
-	<td width="10%">${article.id }</td>
-	<td align='left'  width="35%">
+	<td width="5%" bgcolor="red">${articleNum.count}</td>
+	<td width="10%" bgcolor="green">${article.id }</td>
+	<td align='left'  width="35%"  bgcolor="emerald" >
 	  <span style="padding-right:30px"></span>
 	   <c:choose>
 	      <c:when test='${article.level > 1 }'>  
@@ -65,7 +65,7 @@
 	          </c:otherwise>
 	        </c:choose>
 	  </td>
-	  <td  width="10%">${article.writeDate}</td> 
+	  <td  width="10%" bgcolor="aqua">${article.writeDate}</td> 
 	</tr>
     </c:forEach>
      </c:when>

@@ -20,11 +20,20 @@
      <td>
 		<a href="${contextPath}/main.do">
 			<img src="${contextPath}/resources/image/duke_swing.gif"  />
+			<img src="${contextPath}/resources/image/duke_swing.gif"  />
 		</a>
      </td>
      <td>
        <h1><font size=30>스프링실습 홈페이지!!</font></h1>
+       
      </td>
+     <td>
+		<a href="${contextPath}/main.do">
+			<img src="${contextPath}/resources/image/duke_swing.gif"  />
+			<img src="${contextPath}/resources/image/duke_swing.gif"  />
+		</a>
+     </td>
+     
      
      <td>
        <!-- <a href="#"><h3>로그인</h3></a> -->

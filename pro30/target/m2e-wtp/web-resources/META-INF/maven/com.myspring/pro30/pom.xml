@@ -116,6 +116,7 @@
 			<version>4.7</version>
 			<scope>test</scope>
 		</dependency>
+		<!-- 마이바티스 라이브러리 -->
 		<dependency>
 			<groupId>commons-beanutils</groupId>
 			<artifactId>commons-beanutils</artifactId>

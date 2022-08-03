@@ -22,9 +22,9 @@
          background-color: lightgreen;
       }
       #sidebar-left {
-        width: 15%;
+        width: 16%;
         height:700px;
-        padding: 5px;
+        padding: 15px;
         margin-right: 5px;
         margin-bottom: 5px;
         float: left;
@@ -34,11 +34,13 @@
       }
       #content {
         width: 75%;
-        padding: 5px;
-        margin-right: 5px;
+        padding: 55px;
+        margin-right: 0%;
+        
         float: left;
         border: 0px solid #bcbcbc;
-      }
+         background-color:lightgrey;
+      } 
       #footer {
         clear: both;
         padding: 5px;
