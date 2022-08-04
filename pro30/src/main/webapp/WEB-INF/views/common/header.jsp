@@ -19,17 +19,19 @@
   <tr>
      <td>
 		<a href="${contextPath}/main.do">
-			<img src="${contextPath}/resources/image/duke_swing.gif"  />
+			<img src="${contextPath}/resources/image/duke_swing.gif"  />&nbsp;
 			<img src="${contextPath}/resources/image/duke_swing.gif"  />
 		</a>
      </td>
      <td>
-       <h1><font size=30>스프링실습 홈페이지!!</font></h1>
+       <h1><font size=30><font color=brwon>스프링</font>
+       		 <font color=red>실습</font> 
+       		 <font color=grey>홈페이지</font></font></h1>
        
      </td>
      <td>
 		<a href="${contextPath}/main.do">
-			<img src="${contextPath}/resources/image/duke_swing.gif"  />
+			<img src="${contextPath}/resources/image/duke_swing.gif"  />&nbsp;
 			<img src="${contextPath}/resources/image/duke_swing.gif"  />
 		</a>
      </td>

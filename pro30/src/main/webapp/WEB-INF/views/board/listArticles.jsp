@@ -11,8 +11,9 @@
 <html>
 <head>
  <style>
-   .cls1 {text-decoration:none;}
+   .cls1 {text-decoration:none; }
    .cls2{text-align:center; font-size:30px;}
+   
   </style>
   <meta charset="UTF-8">
   <title>글목록창</title>
@@ -28,7 +29,7 @@
 	}
 </script>
 <body>
-<table align="center" border="1"  width="80%"  >
+<table align="center" border="1"  width="80%" >
   <tr height="10" align="center"  bgcolor="hotpink">
      <td >글번호</td>
      <td >작성자</td>              
@@ -49,8 +50,8 @@
     <c:forEach  var="article" items="${articlesList }" varStatus="articleNum" >
      <tr align="center">
 	<td width="5%" bgcolor="red">${articleNum.count}</td>
-	<td width="10%" bgcolor="green">${article.id }</td>
-	<td align='left'  width="35%"  bgcolor="emerald" >
+	<td width="10%" bgcolor="orange">${article.id }</td>
+	<td align='left'  width="35%"  bgcolor="lightyellow" >
 	  <span style="padding-right:30px"></span>
 	   <c:choose>
 	      <c:when test='${article.level > 1 }'>  
@@ -65,7 +66,7 @@
 	          </c:otherwise>
 	        </c:choose>
 	  </td>
-	  <td  width="10%" bgcolor="aqua">${article.writeDate}</td> 
+	  <td  width="10%" bgcolor="lightgreen">${article.writeDate}</td> 
 	</tr>
     </c:forEach>
      </c:when>

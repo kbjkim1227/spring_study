@@ -15,12 +15,13 @@
    .no-underline{
       text-decoration:none;
    }
+   
  </style>
   <meta charset="UTF-8">
   <title>사이드 메뉴</title>
 </head>
 <body>
-	<h1>사이드 메뉴</h1>
+	<h1><font size=6 color=pink>M E N U</font></h1><br>
 	<!-- <h1>
 		<a href="#"  class="no-underline">회원관리</a><br>
 	    <a href="#"  class="no-underline">게시판관리</a><br>
@@ -28,8 +29,8 @@
     </h1> -->
 	
 	<h1>
-		<a href="${contextPath}/member/listMembers.do"  class="no-underline">회원관리</a><br>
-		<a href="${contextPath}/board/listArticles.do"  class="no-underline">게시판관리</a><br>
+		<a href="${contextPath}/member/listMembers.do"  class="no-underline">회원관리</a><br><br><br>
+		<a href="${contextPath}/board/listArticles.do"  class="no-underline">게시판관리</a><br><br><br>
 		<a href="#"  class="no-underline">상품관리</a><br>
 	</h1>
 	
