@@ -13,11 +13,11 @@
 <title>글쓰기창</title>
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
-   function readURL(input) {
+   function readURL(input, index) {
       if (input.files && input.files[0]) {
 	      var reader = new FileReader();
 	      reader.onload = function (e) {
-	        $('#preview').attr('src', e.target.result);
+	        $('#preview' + index).attr('src', e.target.result);
           }
          reader.readAsDataURL(input.files[0]);
       }
@@ -29,8 +29,17 @@
   
   var cnt=1;
   function fn_addFile(){
-	  $("#d_file").append("<br>"+"<input type='file' name='file"+cnt+"' />");
-	  cnt++;
+	 cnt++;
+	 var innerHtml = "";
+	 innerHtml +='<tr  width=100%  align=center>';
+	 innerHtml +='<td >'+
+	 						"<input  type=file  name='file" + cnt + "'  onchange='readURL(this,"+ cnt + ")'   />"+
+	 					'</td>';
+	 innerHtml +='<td>'+
+						"<img  id='preview" + cnt + "''   width=640 height=480/>"+
+	                   	'</td>';
+	 innerHtml +='</tr>';
+	 $("#tb_newImage").append(innerHtml);
   }  
 
 </script>
@@ -39,28 +48,44 @@
 <body>
 <h1 style="text-align:center">글쓰기</h1>
   <form name="articleForm" method="post"   action="${contextPath}/board/addNewArticle.do"   enctype="multipart/form-data">
-    <table border="0" align="center" >
+    <table border="0"  align="center">
       <tr>
 					<td align="right"> 작성자</td>
-					<td colspan=2  align="left"><input type="text" size="20" maxlength="100"  value="${member.name }" readonly/> </td>
+					<td colspan=2  align="center">${member.name } </td>
 			</tr>
 	     <tr>
 			   <td align="right">글제목: </td>
-			   <td colspan="2"><input type="text" size="67"  maxlength="500" name="title" /></td>
+			   <td colspan="2"><input type="text" size="67"  maxlength="500" name="title"  placeholder="글제목"/></td>
 		 </tr>
 	 		<tr>
 				<td align="right" valign="top"><br>글내용: </td>
-				<td colspan=2><textarea name="content" rows="10" cols="65" maxlength="4000"></textarea> </td>
+				<td colspan=2><textarea name="content" rows="20" cols="100" maxlength="4000" placeholder="이곳에 글을 쓰세요."></textarea> </td>
      </tr>
      <tr>
-			<!--   <td align="right">이미지파일 첨부:  </td>
-			  <td> <input type="file" name="imageFileName"  onchange="readURL(this);" /></td>
-			  <td><img  id="preview" src="#"   width=200 height=200/></td>
-			   -->
+			  <td align="right">이미지파일 첨부</td>
+			  <td> <input type="file" name="imageFileName"  onchange="readURL(this, 0);" /></td>
+			  <td><img  id="preview0" src="#"   width=640px height=480px  /></td>
+			  
+			  
+				
+	   </tr>
+
+	    <tr>
+        <td colspan="3">
+           <table width="100%"  border="0" id="tb_newImage">
+           </table>
+        </td>
+     </tr>
+      <tr height="200px">
+	     <td colspan="3"> 
+	     
+	     </td>
+	   </tr>
+	   <tr>
+	   		  
 			  
 			  <td align="right">이미지파일 첨부</td>
-				<td align="left"> <input type="button" value="파일 추가" onClick="fn_addFile()"/></td>
-				
+				<td align="left"  colspan="2" > <input type="button" value="새 이미지 파일 추가하기" onClick="fn_addFile()"/></td>
 				
 	   </tr>
 	   <tr>

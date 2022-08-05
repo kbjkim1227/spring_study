@@ -29,9 +29,11 @@
     </h1> -->
 	
 	<h1>
-		<a href="${contextPath}/member/listMembers.do"  class="no-underline">회원관리</a><br><br><br>
-		<a href="${contextPath}/board/listArticles.do"  class="no-underline">게시판관리</a><br><br><br>
-		<a href="#"  class="no-underline">상품관리</a><br>
+		<a href="${contextPath}/member/listMembers.do"  class="no-underline">
+		<img src="${contextPath}/resources/image/duke_swing.gif"  /></a><br><br><br>
+		
+		<a href="${contextPath}/board/listArticles.do"  class="no-underline">
+		<img src="${contextPath}/resources/image/duke_swing.gif"  /></a><br><br><br>
 	</h1>
 	
 </body>
