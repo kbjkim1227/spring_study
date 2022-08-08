@@ -15,9 +15,8 @@
   <script src="http://code.jquery.com/jquery-latest.js"></script>
 </head>
 <body>
-   <h1>
-  
-   
-   메인 페이지입니다!!</h1>
+   <h1>메인 페이지입니다!!</h1><br>
+    <h1><a href="https://todaygame.tistory.com/"  class="no-underline">
+		<font size=100>凸凸凸凸凸凸凸凸凸凸凸凸凸凸凸凸凸凸</font></a></h1>
 </body>
-</html>
+</html> 
