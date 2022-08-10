@@ -13,5 +13,8 @@ import org.springframework.web.servlet.ModelAndView;
 public interface BoardController {
 	
 	public ModelAndView listArticles(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
+	public ModelAndView viewArticle(@RequestParam("articleNO") int articleNO,
+            HttpServletRequest request, HttpServletResponse response) throws Exception;
 
 }

@@ -7,4 +7,6 @@ import com.myspring.pro30.board.vo.ArticleVO;
 
 public interface BoardService {
 	public List<ArticleVO> listArticles() throws Exception;
+
+	public ArticleVO viewArticle(int articleNO)throws Exception;;
 }

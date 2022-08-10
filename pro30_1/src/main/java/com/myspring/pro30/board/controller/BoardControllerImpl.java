@@ -48,6 +48,17 @@ public class BoardControllerImpl  implements BoardController{
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("articlesList", articlesList);
 		return mav;
-		
+	}
+	
+	//한개의 이미지 보여주기
+	@RequestMapping(value="/board/viewArticle.do" ,method = RequestMethod.GET)
+	public ModelAndView viewArticle(@RequestParam("articleNO") int articleNO,
+                                    HttpServletRequest request, HttpServletResponse response) throws Exception{
+		String viewName = (String)request.getAttribute("viewName");
+		articleVO=boardService.viewArticle(articleNO);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName(viewName);
+		mav.addObject("article", articleVO);
+		return mav;
 	}
 }
