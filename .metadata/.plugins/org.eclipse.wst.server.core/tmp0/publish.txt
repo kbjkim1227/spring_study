@@ -1,6 +1,7 @@
 #Tomcat publish data
-#Wed Aug 10 19:15:05 KST 2022
+#Thu Aug 11 20:39:49 KST 2022
 org.eclipse.jst.jee.server\:pro30_1=C\:\\apache-tomcat-9\\wtpwebapps\\pro30_1
 org.eclipse.jst.jee.server\:/binary\:C\:\\Users\\505\\.m2\\repository\\org\\springframework\\spring-web\\5.2.7.RELEASE\\spring-web-5.2.7.RELEASE.jar=C\:\\apache-tomcat-9\\wtpwebapps\\pro30_1\\WEB-INF\\lib\\spring-web-5.2.7.RELEASE.jar
+org.eclipse.jst.jee.server\:boardtest=C\:\\apache-tomcat-9\\wtpwebapps\\boardtest
 org.eclipse.jst.jee.server\:pro28=C\:\\apache-tomcat-9\\wtpwebapps\\pro28
 org.eclipse.jst.jee.server\:pro17=C\:\\apache-tomcat-9\\wtpwebapps\\pro17

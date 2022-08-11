@@ -1,7 +1,7 @@
 package com.myspring.pro30.board.service;
 
 import java.util.List;
-import java.util.Map;
+
 
 import com.myspring.pro30.board.vo.ArticleVO;
 
