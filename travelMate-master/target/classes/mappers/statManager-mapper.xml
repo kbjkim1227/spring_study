@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="statManage">
+	<select id="todayBoardCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM
+		BOARD
+		WHERE TO_CHAR(BOARD_DATE, 'YY/MM/DD') = TO_CHAR(SYSDATE,
+		'YY/MM/DD')
+	</select>
+
+	<select id="yesterdayBoardCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM
+		BOARD
+		WHERE TO_CHAR(BOARD_DATE, 'YY/MM/DD') = TO_CHAR(SYSDATE-1,
+		'YY/MM/DD')
+	</select>
+
+	<select id="totalBoardCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM
+		BOARD
+	</select>
+
+	<select id="todayJoinMemberCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM MEMBER
+		WHERE TO_CHAR(ENROLL_DATE, 'YY/MM/DD') = TO_CHAR(SYSDATE,
+		'YY/MM/DD')
+	</select>
+
+	<select id="yesterdayJoinMemberCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM MEMBER
+		WHERE TO_CHAR(ENROLL_DATE, 'YY/MM/DD') = TO_CHAR(SYSDATE-1,
+		'YY/MM/DD')
+	</select>
+
+	<select id="totalJoinMemberCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM MEMBER
+	</select>
+
+	<select id="todayPayment" resultType="_int">
+		SELECT NVL(SUM(MONEY), 0)
+		FROM PAYMENT
+		WHERE TO_CHAR(PAYMENT_DATE, 'YY/MM/DD') = TO_CHAR(SYSDATE,'YY/MM/DD')
+	</select>
+
+	<select id="yesterdayPayment" resultType="_int">
+		SELECT NVL(SUM(MONEY), 0)
+		FROM
+		PAYMENT
+		WHERE TO_CHAR(PAYMENT_DATE, 'YY/MM/DD') = TO_CHAR(SYSDATE-1,
+		'YY/MM/DD')
+	</select>
+
+	<select id="totalPayment" resultType="_int">
+		SELECT NVL(SUM(MONEY), 0)
+		FROM
+		PAYMENT
+	</select>
+
+	<select id="selectMemberRatio" resultType="java.util.HashMap">
+		select user_type_level as type,count(*) as count
+		from member
+		where user_type_level = '일반회원'
+		group by user_type_level
+		union
+		select user_type_level as type,count(*) as count
+		from member
+		where user_type_level = '3'
+		group by user_type_level
+		order by type
+	</select>
+
+
+	<select id="selectMemberEnroll" resultType="java.util.HashMap">
+		select to_char(enroll_date,'mm.dd') as da, count(*) as count
+		from member
+		where enroll_date between sysdate - 7 and sysdate 
+		group by to_char(enroll_date,'mm.dd') 
+		order by to_char(enroll_date,'mm.dd') desc
+	</select>
+	
+	<select id="selectMonth" resultType="java.util.HashMap">
+		select to_char(PAYMENT_DATE, 'mm') as month, sum(money) as sum
+		from payment 
+		where PAYMENT_DATE between add_months(sysdate, -7) and sysdate 
+		group by to_char(PAYMENT_DATE, 'mm')
+		order by to_char(PAYMENT_DATE, 'mm') desc
+	</select>
+</mapper>  

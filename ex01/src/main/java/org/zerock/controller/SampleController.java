@@ -3,12 +3,18 @@ package org.zerock.controller;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.zerock.domain.SampleDTO;
 import org.zerock.domain.SampleDTOList;
+import org.zerock.domain.TodoDTO;
 
 import lombok.extern.log4j.Log4j;
 
@@ -56,5 +62,79 @@ public class SampleController {
         log.info("list dtos: " + list);
         return "ex02Bean";
     }
+    
+
+//    @InitBinder
+//    public void initBinder(WebDataBinder binder){
+//        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//        binder.registerCustomEditor(java.util.Date.class, new CustomDateEditor(dateFormat, false));
+//    }
+
+    @GetMapping("/ex03")
+    public String ex03(TodoDTO todo){
+        log.info("todo: " + todo);
+        return "ex03";
+    }
+    /* Model */
+    /* 기본 자료형은 @ModelAttribute를 선언하여 파라미터를 모델에 담아 jsp로 전달 */
+    @GetMapping("/ex04")
+    public String ex04(SampleDTO dto, @ModelAttribute("page") int page){
+        log.info("dto: " + dto);
+        log.info("page: " + page);
+        return "/sample/ex04";// forwarding to: /views/sample/ex04.jsp
+    }
+
+    @GetMapping("/ex05")// url 경로가 jsp 파일 이름, forwarding to: /views/sample/ex05.jsp
+    public void ex05(){
+        log.info("/ex05...");
+    }
+
+    /* VO나 DTO 리턴 -> JSON data, 몸체가 내용이 됨 */
+    @GetMapping("/ex06")
+    public @ResponseBody SampleDTO ex06(){
+        log.info("/ex06...");
+
+        SampleDTO dto = new SampleDTO();
+        dto.setAge(10);
+        dto.setName("홍길동");
+
+        return dto;
+    }
+
+    @GetMapping("/ex07")
+    public ResponseEntity<String> ex07(){
+        log.info("/ex07...");
+
+        String msg = "{\"name\": \"홍길동\"}";// {"name": "홍길동"}
+
+        HttpHeaders header = new HttpHeaders();
+        header.add("Content-Type", "application/json;charset=UTF-8");
+
+        return new ResponseEntity<>(msg, header, HttpStatus.OK);
+    }
+
+//    /* file upload */
+//    @GetMapping("/exUpload")
+//    public void exUpload(){
+//        log.info("/exUpload...");
+//    }
+//
+//    @PostMapping("/exUploadPost")
+//    public void exUploadPost(ArrayList<MultipartFile> files){
+//        files.forEach(file -> {
+//            log.info("---------");
+//            log.info("name: " + file.getOriginalFilename());
+//            log.info("size: " + file.getSize());
+//        });
+//    }
+//
+//
+//     @GetMapping("/test")
+//    public void test() throws ClassNotFoundException {
+//        //int[] array = new int[3];
+//
+//        //array[3] = 5;// 런타임 에러 발생
+//        Class.forName("org.zerock");
+//    }
 
 }

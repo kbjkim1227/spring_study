@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BoardManage">
+	<resultMap
+		type="com.kh.travelMate.admin.model.vo.BoardManage"
+		id="boardmanageResultSet">
+		<id property="board_no" column="BOARD_NO"></id>
+		<result property="writer" column="WRITER"></result>
+		<result property="category" column="CATEGORY"></result>
+		<result property="title" column="TITLE"></result>
+		<result property="content" column="CONTENT"></result>
+		<result property="board_date" column="BOARD_DATE"></result>
+		<result property="status" column="STATUS"></result>
+		<result property="board_level" column="BOARD_LEVEL"></result>
+		<result property="ref_no" column="REF_NO"></result>
+		<result property="email" column="EMAIL"></result>
+		<result property="user_Name" column="USER_NAME"></result>
+		<result property="nick_Name" column="NICK_NAME"></result>
+		<result property="phone" column="PHONE"></result>
+		<result property="birthDay" column="BIRTHDAY"></result>
+		<result property="gender" column="GENDER"></result>
+		<result property="enroll_Date" column="ENROLL_DATE"></result>
+	</resultMap>
+
+	<resultMap
+		type="com.kh.travelMate.admin.model.vo.ConsultManage"
+		id="consultapplyResultSet">
+		<id property="consult_Apply_No" column="CONSULT_APPLY_NO"></id>
+		<result property="apply_Date" column="APPLY_DATE"></result>
+		<result property="job" column="JOB"></result>
+		<result property="info" column="INFO"></result>
+		<result property="travel_Exp" column="TRAVEL_EXP"></result>
+		<result property="idea" column="IDEA"></result>
+		<result property="etc" column="ETC"></result>
+		<result property="user_No" column="USER_NO"></result>
+		<result property="user_Type_Level" column="USER_TYPE_LEVEL"></result>
+		<result property="consult_Ok_Record_No"
+			column="CONSULT_OK_RECORD_NO"></result>
+		<result property="status" column="STATUS"></result>
+		<result property="reason" column="REASON"></result>
+		<result property="agree_Date" column="AGREE_DATE"></result>
+		<result property="attachMent_No" column="ATTACHMENT_NO"></result>
+		<result property="origin_Name" column="ORIGIN_NAME"></result>
+	</resultMap>
+
+	<resultMap type="AttachmentInfo" id="getFileInfoResultSet">
+		<id property="attachMent_No" column="ATTACHMENT_NO"></id>
+		<result property="origin_Name" column="ORIGIN_NAME"></result>
+		<result property="modify_Name" column="MODIFY_NAME"></result>
+		<result property="file_Root" column="FILE_ROOT"></result>
+		<result property="upload_Date" column="UPLOAD_DATE"></result>
+		<result property="type" column="TYPE"></result>
+		<result property="ref_No" column="REF_NO"></result>
+	</resultMap>
+
+	<!-- 모든 게시물 목록을 조회해 오는 쿼리문 -->
+	<select id="selectAllBoard" parameterType="BoardManage"
+		resultMap="boardmanageResultSet">
+		SELECT *
+		FROM BOARD B
+		JOIN MEMBER M ON (M.USER_NO = B.WRITER)
+	</select>
+
+	<select id="boardListCount" resultType="_int"
+		parameterType="java.util.HashMap">
+		SELECT NVL(COUNT(*), 0)
+		FROM BOARD
+		<where>
+			<if test="sel == 'title'">
+				title like #{val}
+			</if>
+			<if test="sel == 'content'">
+				AND content like #{val}
+			</if>
+			<if test="sel == 'writer'">
+				AND writer like #{val}
+			</if>
+		</where>
+	</select>
+
+	<select id="noticeListCount" resultType="_int">
+		SELECT NVL(COUNT(*), 0)
+		FROM
+		BOARD
+		WHERE CATEGORY = '1'
+	</select>
+
+	<select id="boardList" parameterType="java.util.HashMap"
+		resultMap="boardmanageResultSet">
+		SELECT BOARD_NO, WRITER, CATEGORY, TITLE, CONTENT,
+		BOARD_DATE, STATUS,
+		BOARD_LEVEL, REF_NO, EMAIL, USER_NAME, NICK_NAME,
+		PHONE, BIRTHDAY,
+		GENDER, ENROLL_DATE
+		FROM BOARD B
+		JOIN MEMBER M ON
+		(M.USER_NO = B.WRITER)
+		<where>
+			<if test="sel == 'title'">
+				TITLE like #{val}
+			</if>
+			<if test="sel == 'content'">
+				AND CONTENT like #{val}
+			</if>
+			<if test="sel == 'writer'">
+				AND NICK_NAME like #{val}
+			</if>
+		</where>
+		START WITH BOARD_LEVEL = 1
+		CONNECT BY NOCYCLE
+		PRIOR
+		BOARD_NO = REF_NO
+
+		ORDER SIBLINGS BY BOARD_NO DESC
+	</select>
+
+	<select id="selectBoardDetail" parameterType="_int"
+		resultMap="boardmanageResultSet">
+		SELECT BOARD_NO, WRITER, CATEGORY, TITLE, CONTENT,
+		BOARD_DATE, STATUS,
+		BOARD_LEVEL, REF_NO, EMAIL, USER_NAME, NICK_NAME,
+		PHONE, BIRTHDAY,
+		GENDER, ENROLL_DATE
+		FROM BOARD B
+		JOIN MEMBER M ON
+		(M.USER_NO = B.WRITER)
+		WHERE BOARD_NO = #{ board_no } OR REF_NO = #{
+		board_no }
+		START WITH BOARD_LEVEL = 1
+		CONNECT BY NOCYCLE PRIOR BOARD_NO
+		= REF_NO
+		ORDER SIBLINGS BY BOARD_NO DESC
+	</select>
+
+	<select id="selectBoardDetailOne" parameterType="_int"
+		resultMap="boardmanageResultSet">
+		SELECT BOARD_NO, WRITER, CATEGORY, TITLE, CONTENT,
+		BOARD_DATE, STATUS,
+		BOARD_LEVEL, REF_NO, EMAIL, USER_NAME, NICK_NAME,
+		PHONE, BIRTHDAY,
+		GENDER, ENROLL_DATE
+		FROM BOARD B
+		JOIN MEMBER M ON
+		(M.USER_NO = B.WRITER)
+		WHERE BOARD_NO = #{ board_no }
+	</select>
+
+	<update id="deleteBoardAll" parameterType="_int">
+		UPDATE BOARD
+		SET STATUS
+		= 'N'
+		WHERE BOARD_NO = #{ board_no } OR (REF_NO = #{ board_no }
+		AND
+		BOARD_LEVEL = 2)
+	</update>
+
+	<update id="revertBoardAll" parameterType="_int">
+		UPDATE BOARD
+		SET STATUS
+		= 'Y'
+		WHERE BOARD_NO = #{ board_no }
+	</update>
+
+	<select id="consultApplyListCount" resultType="_int">
+		SELECT
+		NVL(COUNT(*), 0)
+		FROM CONSULT_APPLY CA
+	</select>
+
+	<select id="consultApplyList" parameterType="ConsultManage"
+		resultMap="consultapplyResultSet">
+		SELECT *
+		FROM CONSULT_APPLY CA
+		JOIN MEMBER M ON
+		(CA.USER_NO =
+		M.USER_NO)
+		LEFT JOIN CONSULT_OK_RECORD COR ON
+		(CA.CONSULT_APPLY_NO =
+		COR.CONSULT_APPLY_NO)
+		ORDER BY CA.CONSULT_APPLY_NO DESC
+	</select>
+
+	<select id="consultApplyDetail" parameterType="_int"
+		resultMap="consultapplyResultSet">
+		SELECT *
+		FROM CONSULT_APPLY CA
+		LEFT JOIN MEMBER M ON
+		(CA.USER_NO = M.USER_NO)
+		LEFT JOIN CONSULT_OK_RECORD COR ON
+		(CA.CONSULT_APPLY_NO = COR.CONSULT_APPLY_NO)
+		LEFT JOIN ATTACHMENT AM ON
+		(CA.CONSULT_APPLY_NO = AM.REF_NO)
+		WHERE CA.CONSULT_APPLY_NO = #{
+		apply_no } AND TYPE = 1
+	</select>
+
+	<insert id="consultApplyAccept" parameterType="ConsultManage">
+		INSERT INTO
+		CONSULT_OK_RECORD (CONSULT_OK_RECORD_NO, CONSULT_APPLY_NO, STATUS,
+		REASON, AGREE_DATE)
+		VALUES(SEQ_CONSULT_OK_RECORD_NO.NEXTVAL, #{
+		consult_Apply_No }, 'Y', #{ reason }, SYSDATE)
+	</insert>
+
+	<insert id="consultApplyRefuse" parameterType="ConsultManage">
+		INSERT INTO
+		CONSULT_OK_RECORD (CONSULT_OK_RECORD_NO, CONSULT_APPLY_NO, STATUS,
+		REASON, AGREE_DATE)
+		VALUES(SEQ_CONSULT_OK_RECORD_NO.NEXTVAL, #{
+		consult_Apply_No }, 'N', #{ reason }, SYSDATE)
+	</insert>
+
+	<update id="updateBoardDetail" parameterType="BoardManage">
+		UPDATE BOARD SET
+		CONTENT = #{ content }, BOARD_DATE = SYSDATE
+		WHERE BOARD_NO = #{
+		board_no }
+	</update>
+
+	<update id="consultApplyAcceptSuccess"
+		parameterType="ConsultManage">
+		UPDATE MEMBER SET USER_TYPE_LEVEL = '3'
+		WHERE USER_NO =
+		#{ user_No }
+	</update>
+
+	<insert id="insertBoardReply" parameterType="BoardManage">
+		INSERT INTO BOARD
+		VALUES (SEQ_BOARD_NO.NEXTVAL, #{ writer }, 2, #{ title }, #{ content
+		}, SYSDATE, 'Y', 2, #{ ref_no })
+	</insert>
+
+	<update id="updateBoardReplyStatus" parameterType="_int">
+		UPDATE
+		BOARD_STATUS SET STATUS = 'Y'
+		WHERE BOARD_NO = #{ ref_no }
+	</update>
+
+	<select id="noticeList" parameterType="BoardManage"
+		resultMap="boardmanageResultSet">
+		SELECT BOARD_NO, WRITER, CATEGORY, TITLE, CONTENT,
+		BOARD_DATE, STATUS,
+		BOARD_LEVEL, REF_NO, EMAIL, USER_NAME, NICK_NAME,
+		PHONE, BIRTHDAY,
+		GENDER, ENROLL_DATE
+		FROM BOARD B
+		JOIN MEMBER M ON
+		(M.USER_NO = B.WRITER)
+		WHERE CATEGORY = '1'
+		ORDER BY BOARD_NO DESC
+	</select>
+
+	<insert id="insertNotice" parameterType="BoardManage">
+		INSERT INTO BOARD
+		VALUES
+		(SEQ_BOARD_NO.NEXTVAL, #{ writer }, 1, #{ title }, #{ content },
+		SYSDATE, 'Y', 1, NULL)
+	</insert>
+
+	<select id="getOTOboardList" resultMap="boardmanageResultSet">
+		SELECT *
+		FROM BOARD B
+		JOIN
+		MEMBER M ON M.USER_NO = B.WRITER
+		WHERE CATEGORY = '2' AND STATUS = 'Y'
+		AND BOARD_LEVEL = 1
+		ORDER BY BOARD_NO DESC
+	</select>
+
+	<select id="getRecentBoardList" resultMap="boardmanageResultSet">
+		SELECT *
+		FROM BOARD B
+		JOIN MEMBER M ON M.USER_NO = B.WRITER
+		WHERE CATEGORY = '3' AND STATUS =
+		'Y' AND BOARD_LEVEL = 1
+		ORDER BY BOARD_NO DESC
+	</select>
+
+	<select id="getFileInfo" parameterType="_int"
+		resultMap="getFileInfoResultSet">
+		SELECT *
+		FROM ATTACHMENT
+		WHERE ATTACHMENT_NO = #{
+		attachMent_No }
+	</select>
+
+	<select id="openConsultListCount" resultType="_int"
+		parameterType="java.util.HashMap">
+		SELECT NVL(COUNT(*), 0)
+		FROM BOARD
+		WHERE CATEGORY = '3'
+		<if test="sel == 'title'">
+			AND title like #{val}
+		</if>
+		<if test="sel == 'content'">
+			AND content like #{val}
+		</if>
+		<if test="sel == 'writer'">
+			AND writer like #{val}
+		</if>
+	</select>
+
+	<select id="openConsultList" parameterType="java.util.HashMap"
+		resultMap="boardmanageResultSet">
+		SELECT BOARD_NO, WRITER, CATEGORY, TITLE, CONTENT,
+		BOARD_DATE, STATUS,
+		BOARD_LEVEL, REF_NO, EMAIL, USER_NAME, NICK_NAME,
+		PHONE, BIRTHDAY,
+		GENDER, ENROLL_DATE
+		FROM BOARD B
+		JOIN MEMBER M ON
+		(M.USER_NO = B.WRITER)
+		WHERE CATEGORY = '3'
+		<if test="sel == 'title'">
+			AND TITLE like #{val}
+		</if>
+		<if test="sel == 'content'">
+			AND CONTENT like #{val}
+		</if>
+		<if test="sel == 'writer'">
+			AND NICK_NAME like #{val}
+		</if>
+		START WITH BOARD_LEVEL = 1
+		CONNECT BY NOCYCLE
+		PRIOR
+		BOARD_NO = REF_NO
+
+		ORDER SIBLINGS BY BOARD_NO DESC
+	</select>
+
+	<select id="oneToOneListCount" resultType="_int"
+		parameterType="java.util.HashMap">
+		SELECT NVL(COUNT(*), 0)
+		FROM BOARD
+		WHERE CATEGORY = '2'
+		<if test="sel == 'title'">
+			AND title like #{val}
+		</if>
+		<if test="sel == 'content'">
+			AND content like #{val}
+		</if>
+		<if test="sel == 'writer'">
+			AND writer like #{val}
+		</if>
+	</select>
+
+	<select id="oneToOneList" parameterType="java.util.HashMap"
+		resultMap="boardmanageResultSet">
+		SELECT BOARD_NO, WRITER, CATEGORY, TITLE, CONTENT,
+		BOARD_DATE, STATUS,
+		BOARD_LEVEL, REF_NO, EMAIL, USER_NAME, NICK_NAME,
+		PHONE, BIRTHDAY,
+		GENDER, ENROLL_DATE
+		FROM BOARD B
+		JOIN MEMBER M ON
+		(M.USER_NO = B.WRITER)
+		WHERE CATEGORY = '2'
+		<if test="sel == 'title'">
+			AND TITLE like #{val}
+		</if>
+		<if test="sel == 'content'">
+			AND CONTENT like #{val}
+		</if>
+		<if test="sel == 'writer'">
+			AND NICK_NAME like #{val}
+		</if>
+		START WITH BOARD_LEVEL = 1
+		CONNECT BY NOCYCLE
+		PRIOR
+		BOARD_NO = REF_NO
+
+		ORDER SIBLINGS BY BOARD_NO DESC
+	</select>
+
+</mapper>  

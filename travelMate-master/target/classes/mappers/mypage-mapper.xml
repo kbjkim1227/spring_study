@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+  
+  
+<mapper namespace="Mypage">
+	
+	
+	<resultMap type="Board" id="boardResultSet">
+		<id property="boardNo" column="BOARD_NO"/>
+		<result property="rowNum" column="ROWNUM"/>
+		<result property="writer" column="WRITER"/>
+		<result property="nickName" column="NICK_NAME"/>
+		<result property="category" column="CATEGORY"/>
+		<result property="title" column="TITLE"/>
+		<result property="content" column="CONTENT"/>
+		<result property="boardDate" column="BOARD_DATE"/>
+		<result property="status" column="STATUS"/>
+		<result property="boardLevel" column="BOARD_LEVEL"/>
+		<result property="refNo" column="REF_NO"/>
+		<result property="boardStatus" column="BOARD_STATUS"/>
+	</resultMap>
+	
+
+	<select id="cyberMoneyHistory" resultType="java.util.HashMap" parameterType="int">
+		select CYBERMONEY_RECORD_NO,USER_NO,CR.PROOF_NO,RECORD_DATE,CHANGE_MONEY,CHANGE_REASON,BEFORE_MONEY
+		from CYBERMONEY_RECORD CR
+		WHERE USER_NO = #{user_no}
+		order by record_date desc
+	</select> 
+	
+	<select id="consultingCustomerHistory" resultType="java.util.HashMap" parameterType="_int">
+		SELECT * 
+		FROM CONSULT_REQUEST cr
+		join member m on (cr.REQUEST_USER_NO = m.user_no) 
+		WHERE CONSULT_USER_NO = #{user_no}
+		and status = 'N'
+	</select> 
+	
+	
+	<select id="oneByOneHistory" resultType="java.util.HashMap" parameterType="_int">
+		SELECT b.board_no, title, nick_name, bs.status, b.board_date
+		FROM BOARD b
+        join member m on(b.writer = m.user_no)
+        join board_status bs on(b.board_no = bs.board_no)
+		WHERE WRITER = #{user_no}
+		AND CATEGORY = '2'
+        and b.status = 'Y'
+	</select>
+	
+	<select id="tradeInfoHistory" resultType="java.util.HashMap" parameterType="_int">
+		SELECT *
+		FROM CONSULT_REQUEST
+		WHERE REQUEST_USER_NO = #{user_no}
+		
+	</select>
+	
+	<update id="modifyUserInfo" parameterType="com.kh.travelMate.member.model.vo.Member">
+		UPDATE MEMBER
+		SET BIRTHDAY=#{birthday}, PHONE=#{phone}, NICK_NAME=#{nick_name}
+		WHERE  USER_NO=#{user_no}
+	</update>
+	
+	
+	<select id="nickNameCheck" resultType="java.lang.Integer" parameterType="java.lang.String">
+		SELECT COUNT(*)
+		FROM MEMBER
+		WHERE NICK_NAME = #{nick_name}
+	</select>
+	
+	<select id="cyberMoney" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+		SELECT CYBERMONEY
+		FROM member
+		WHERE USER_NO = #{user_no}
+	</select>
+	
+	<insert id="insertCyberMoney" parameterType="java.util.HashMap">
+		insert into payment
+		values(seq_payment_NO.nextval, #{imp_uid}, '구매', #{money}, sysdate, '결제완료', '카드', null, #{userNo}) 
+	</insert>
+	
+	<insert id="insertCyberMoney3" parameterType="java.util.HashMap">
+		insert into payment
+		values(seq_payment_NO.nextval, seq_payment_info_no.nextval, '구매', #{money}, sysdate, '입금대기', '현금', null, #{userNo})
+	</insert>
+	<insert id="insertCyberMoney4" parameterType="java.util.HashMap">
+		insert into payment_info
+		values(seq_payment_info_no.currval, #{account_no}, #{account_name})
+	</insert>
+	<insert id="insertCyberMoney5" parameterType="java.util.HashMap">
+		insert into payment
+		values(seq_payment_NO.nextval, #{imp_uid}, '환불', #{money}, sysdate, '환불대기', '현금', (select PAYMENT_NO from payment where PROOF_NO = #{imp_uid}), #{userNo})
+	</insert>
+	<insert id="insertCyberMoney2" parameterType="java.util.HashMap">
+		insert into payment
+		values(seq_payment_NO.nextval, #{imp_uid}, '환불', #{money}, sysdate, '환불완료', '카드', (select PAYMENT_NO from payment where PROOF_NO = #{imp_uid}), #{userNo})
+	</insert>
+	
+	<select id="checkpwd" parameterType="com.kh.travelMate.member.model.vo.Member" resultType="java.lang.String">
+		SELECT PASSWORD 
+		FROM MEMBER 
+		WHERE USER_NO = #{user_no}	
+	</select>
+	
+	<update id="updatepwd" parameterType="com.kh.travelMate.member.model.vo.Member">
+		UPDATE MEMBER 
+		SET PASSWORD = #{password} 
+		WHERE USER_NO = #{user_no}
+	</update>
+	
+	
+	<update id="updateCancel" parameterType="com.kh.travelMate.member.model.vo.Member">
+		UPDATE MEMBER 
+		SET USER_TYPE_LEVEL = '탈퇴회원'
+		WHERE USER_NO = #{user_no}
+	</update>
+	
+	<!-- 1:1 문의 상세보기 -->
+	
+	<select id="selectOneByOneBoard" parameterType="_int" resultMap="boardResultSet">
+		SELECT BOARD_NO, WRITER, NICK_NAME, CATEGORY, TITLE, CONTENT, BOARD_DATE, STATUS, BOARD_LEVEL, REF_NO
+		FROM (SELECT B.BOARD_NO, B.WRITER, M.NICK_NAME, B.CATEGORY, B.TITLE, B.CONTENT, B.BOARD_DATE, B.STATUS, B.BOARD_LEVEL, B.REF_NO
+			  FROM BOARD B
+			  JOIN MEMBER M ON(B.WRITER = M.USER_NO)
+			  WHERE BOARD_NO = #{boardNo} )
+	</select>
+	
+	
+<!-- 	거래내역 상세보기 -->
+	<select id="selectOneTrade" parameterType="_int" resultType="com.kh.travelMate.others.model.vo.ConsultRequest2">
+	
+		SELECT CONSULT_REQUEST_NO, TRAVEL_PURPOSE, ADULT_NUM, CHILD_NUM, TRAVEL_AREA, TRAVEL_START_DATE,
+  			   TRAVEL_END_DATE, BUDGET, ETC, STATUS, REQUEST_USER_NO, CONSULT_USER_NO, M.NICK_NAME as requestNickName, M2.NICK_NAME as consultNickName
+		FROM CONSULT_REQUEST CQ
+		JOIN MEMBER M ON(M.USER_NO = CQ.REQUEST_USER_NO)
+		JOIN MEMBER M2 ON(M2.USER_NO = CQ.CONSULT_USER_NO)
+		WHERE CONSULT_REQUEST_NO = #{ CONSULT_REQUEST_NO }
+	
+	</select>
+
+	 <!-- 컨설턴트 프로필 검색 -->
+	 
+	 <select id="selectProfile" resultType="java.util.HashMap" parameterType="_int">
+		SELECT *
+		FROM BOARD 
+		WHERE WRITER = #{user_no} 
+		AND CATEGORY = '프로필'
+	</select>
+	
+	
+	 <select id="selectProfileAttachment" resultType="java.lang.String" parameterType="_int">
+	 	SELECT MODIFY_NAME
+		FROM ATTACHMENT 
+		WHERE REF_NO = #{user_no}	
+	</select>
+	
+	 <!-- 컨설턴트 프로필 등록 -->
+	 <update id="insertProfile" parameterType="java.util.HashMap">
+	 	UPDATE board 
+		SET title = #{title}, content=#{content}, status='Y'
+		WHERE writer = #{user_no}
+	</update>
+	 
+	 <update id="insertProfileAttachment" parameterType="Attachment">
+		UPDATE ATTACHMENT 
+		SET modify_Name = #{modifyName}, upload_date=SYSDATE, origin_Name=#{originName}
+		WHERE ref_no = #{refNo}
+	</update>
+
+
+<!-- 	오픈컨설팅리스트 받아오기  b.category=3이고 status Y 여야함-->
+	<select id="openConsultingList" parameterType="_int" resultType="java.util.HashMap">
+		SELECT BOARD_NO,WRITER, CATEGORY, TITLE, CONTENT, BOARD_DATE, STATUS, BOARD_LEVEL, REF_NO, M.NICK_NAME
+		FROM BOARD B
+		JOIN MEMBER M ON(M.USER_NO = B.WRITER)
+		WHERE M.USER_NO = #{user_no}
+		AND B.CATEGORY ='3'
+		AND B.STATUS ='Y'
+	</select>
+	
+<!-- 	오픈컨설팅 상세내역 보기 -->
+	<select id="openConsultingDetail" parameterType="_int" resultType="java.util.HashMap">
+		SELECT BOARD_NO,WRITER, CATEGORY, TITLE, CONTENT, BOARD_DATE, STATUS, BOARD_LEVEL, REF_NO, M.NICK_NAME
+		FROM BOARD B
+		JOIN MEMBER M ON(M.USER_NO = B.WRITER)
+		WHERE B.BOARD_NO = #{boardNo} 
+		AND B.CATEGORY ='3'
+		AND B.STATUS ='Y'	
+	</select>
+	
+
+	<insert id="insertResponse" parameterType="java.util.HashMap">
+		insert into CONSULT_RESPONSE
+		values(SEQ_CONSULT_RESPONSE_NO.nextval,#{content}, #{no}, sysdate,#{user_no})
+	</insert>
+	
+	
+	<insert id="insertWithdraw" parameterType="Withdraw">
+		insert into WITHDRAW
+		values(SEQ_WITHDRAW_NO.nextval,'N', sysdate, #{NAME},#{BANK}, #{BANK_NO}, #{USER_NO} ,#{MONEY})
+	</insert>
+	
+<!-- 다이렉트답변보기 -->
+	<select id="selectOneDirectResponse" parameterType="_int" resultType="java.util.HashMap">
+		SELECT CP.CONSULT_RESPONSE_NO, CP.SUMMARY, CP.CONSULT_REQUEST_NO, CP.RESPONSE_DATE, CP.USER_NO, M.NICK_NAME
+		FROM CONSULT_RESPONSE CP
+		JOIN MEMBER M ON(CP.USER_NO=M.USER_NO)
+		WHERE CONSULT_REQUEST_NO = #{CONSULT_REQUEST_NO}
+	</select>
+	
+	<select id="selectOneOpenTrade2" parameterType="_int" resultType="java.util.HashMap">
+		select *
+		from board b
+		join member m on(b.writer = m.user_no)
+		where ref_no = #{no}
+	</select>
+</mapper> 
+
+

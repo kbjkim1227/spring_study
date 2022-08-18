@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- XML문서의 유효성 체크를 위해 필요한 부분 -->
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<!-- typealies 랑 mapper만 하고// db관련된건 root-context에다가 한다 -->
+<configuration>
+<!-- 	<settings>
+
+        <setting name="jdbcTypeForNull" value="NULL"/>
+
+    </settings> -->
+	<typeAliases>
+		<typeAlias type="com.kh.travelMate.member.model.vo.Member" alias="Member"/>
+    	<typeAlias type="com.kh.travelMate.board.model.vo.Board" alias="Board"/>
+		<typeAlias type="com.kh.travelMate.admin.model.vo.MemberManage" alias="MemberManage"/>
+		<typeAlias type="com.kh.travelMate.admin.model.vo.BoardManage" alias="BoardManage"/>
+		<typeAlias type="com.kh.travelMate.admin.model.vo.ConsultManage" alias="ConsultManage"/>
+		<typeAlias type="com.kh.travelMate.admin.model.vo.StatManage" alias="StatManage"/>
+		<typeAlias type="com.kh.travelMate.admin.model.vo.StatSummaryManage" alias="StatSummaryManage"/>
+		<typeAlias type="com.kh.travelMate.admin.model.vo.PaymentManage" alias="PaymentManage"/>
+		<typeAlias type="com.kh.travelMate.admin.model.vo.AttachmentInfo" alias="AttachmentInfo"/>
+		<typeAlias type="com.kh.travelMate.admin.model.vo.PaymentRequest" alias="PaymentRequest"/>		
+		<typeAlias type="com.kh.travelMate.others.model.vo.ConsultApply" alias="ConsultApply"/>
+		<typeAlias type="com.kh.travelMate.others.model.vo.ConsultRequest" alias="ConsultRequest"/>
+		<typeAlias type="com.kh.travelMate.common.Attachment" alias="Attachment"/>
+		<typeAlias type="com.kh.travelMate.mypage.model.vo.Withdraw" alias="Withdraw"/>
+	</typeAliases>
+	<mappers>
+		<mapper resource="mappers/member-mapper.xml"/>
+		<mapper resource="mappers/memberManager-mapper.xml"/>
+		<mapper resource="mappers/boardManager-mapper.xml"/>
+		<mapper resource="mappers/paymentManager-mapper.xml"/>
+		<mapper resource="mappers/statManager-mapper.xml"/>
+    	<mapper resource="mappers/board-mapper.xml"/>
+		<mapper resource="mappers/mypage-mapper.xml"/>
+		<mapper resource="mappers/others-mapper.xml"/>
+	</mappers>
+	
+	
+	
+</configuration> 
+
+
+
+
+
+
+  

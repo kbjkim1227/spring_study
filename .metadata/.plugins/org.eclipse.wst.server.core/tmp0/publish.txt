@@ -1,6 +1,6 @@
 #Tomcat publish data
-#Tue Aug 16 16:00:38 KST 2022
-org.eclipse.jst.jee.server\:/binary\:C\:\\Users\\505\\.m2\\repository\\org\\springframework\\spring-web\\5.2.7.RELEASE\\spring-web-5.2.7.RELEASE.jar=C\:\\apache-tomcat-9\\wtpwebapps\\ex01\\WEB-INF\\lib\\spring-web-5.2.7.RELEASE.jar
-org.eclipse.jst.jee.server\:ex01=C\:\\apache-tomcat-9\\wtpwebapps\\ex01
+#Wed Aug 17 17:51:04 KST 2022
+org.eclipse.jst.jee.server\:travelMate-master=C\:\\apache-tomcat-9\\wtpwebapps\\travelMate-master
 org.eclipse.jst.jee.server\:pro28=C\:\\apache-tomcat-9\\wtpwebapps\\pro28
 org.eclipse.jst.jee.server\:pro17=C\:\\apache-tomcat-9\\wtpwebapps\\pro17
+org.eclipse.jst.jee.server\:/binary\:C\:\\Users\\505\\.m2\\repository\\org\\springframework\\spring-web\\5.0.8.RELEASE\\spring-web-5.0.8.RELEASE.jar=C\:\\apache-tomcat-9\\wtpwebapps\\travelMate-master\\WEB-INF\\lib\\spring-web-5.0.8.RELEASE.jar
