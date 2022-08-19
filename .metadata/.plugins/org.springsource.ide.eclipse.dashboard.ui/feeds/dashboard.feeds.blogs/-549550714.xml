@@ -5,7 +5,20 @@
   <link rel="self" href="https://spring.io/blog.atom" />
   <id>http://spring.io/blog.atom</id>
   <icon>https://spring.io/favicon.ico</icon>
-  <updated>2022-08-18T07:24:30Z</updated>
+  <updated>2022-08-18T10:00:00Z</updated>
+  <entry>
+    <title>A Bootiful Podcast: Flowable founder Joram Barrez on a Bootiful Podcast on workflow, business process management, and more</title>
+    <link rel="alternate" href="https://spring.io/blog/2022/08/18/a-bootiful-podcast-flowable-founder-joram-barrez-on-a-bootiful-podcast-on-workflow-business-process-management-and-more" />
+    <category term="engineering" label="Engineering" />
+    <author>
+      <name>Josh Long</name>
+    </author>
+    <id>tag:spring.io,2022-08-18:4888</id>
+    <updated>2022-08-18T10:00:00Z</updated>
+    <content type="html">&lt;p&gt;Hi, Spring fans! In this installment, Josh Long (@starbuxman) talks to Flowable founder Joram Barrez (@jbarrez) about workflow, business process management (BPM), decision management, rules, and so much more&lt;/p&gt;
+&lt;iframe title="Flowable founder (and my friend) Joram Barrez on a Bootiful Podcast on workflow, business process management, and more" allowtransparency="true" height="150" width="100%" style="border: none; min-width: min(100%, 430px);" scrolling="no" data-name="pb-iframe-player" src="https://www.podbean.com/player-v2/?i=hs7gc-12a0620-pb&amp;from=pb6admin&amp;share=1&amp;download=1&amp;rtl=0&amp;fonts=Arial&amp;skin=1&amp;font-color=&amp;logo_link=episode_page&amp;btn-skin=7"&gt;&lt;/iframe&gt;
+&lt;!-- rendered by Sagan Renderer Service --&gt;</content>
+  </entry>
   <entry>
     <title>Spring Boot 2.7.3 available now</title>
     <link rel="alternate" href="https://spring.io/blog/2022/08/18/spring-boot-2-7-3-available-now" />
@@ -1139,19 +1152,6 @@ When separating by the database, you might use &lt;code&gt;AbstractRoutingDataSo
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;!-- rendered by Sagan Renderer Service --&gt;</content>
-  </entry>
-  <entry>
-    <title>A Bootiful Podcast: RabbitMQ rabbit-herder Dan Carwin</title>
-    <link rel="alternate" href="https://spring.io/blog/2022/07/28/a-bootiful-podcast-rabbitmq-rabbit-herder-dan-carwin" />
-    <category term="engineering" label="Engineering" />
-    <author>
-      <name>Josh Long</name>
-    </author>
-    <id>tag:spring.io,2022-07-28:4869</id>
-    <updated>2022-07-28T13:00:00Z</updated>
-    <content type="html">&lt;p&gt;Hi, Spring fans! In this installment &lt;a href="https://twitter.com/starbuxman"&gt;Josh Long (@starbuxman)&lt;/a&gt; talks to a very busy rabbit-herder on the RabbitMQ team, &lt;a href="https://twitter.com/dcarwin"&gt;Dan Carwin (@dcarwin)&lt;/a&gt;&lt;/p&gt;
-&lt;iframe title="RabbitMQ rabbit-herder Dan Carwin" allowtransparency="true" height="150" width="100%" style="border: none; min-width: min(100%, 430px);" scrolling="no" data-name="pb-iframe-player" src="https://www.podbean.com/player-v2/?i=dv6wp-1285dc3-pb&amp;from=pb6admin&amp;share=1&amp;download=1&amp;rtl=0&amp;fonts=Arial&amp;skin=1&amp;font-color=&amp;logo_link=episode_page&amp;btn-skin=7"&gt;&lt;/iframe&gt;
 &lt;!-- rendered by Sagan Renderer Service --&gt;</content>
   </entry>
 </feed>
