@@ -74,12 +74,18 @@
                      return;
                   }
                
+                  if(result==='success'){
+                	  $(".modal-body".html)(
+                			  "정상적으로 처리되었습니다.")
+                  }//삭제용
+                  
                   if(parseInt(result) > 0){
                      $(".modal-body").html(
                         "게시물 " + parseInt(result) + " 번이 등록되었습니다.");
                   }
                   $("#myModal").modal("show");
                }
+               
                
                    $("#regBtn").on("click", function(){
                           self.location = "/board/register";

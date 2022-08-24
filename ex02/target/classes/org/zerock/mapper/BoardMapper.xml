@@ -27,6 +27,17 @@
 		insert into tbl_board (bno, title, content, writer)
 		values (#{bno}, #{title}, #{content}, #{writer})
 	</insert>	
+	    <select id="getListWithPaging" resultType="org.zerock.domain.BoardVO">
+        <![CDATA[
+            SELECT bno, title, content, writer, regdate, updatedate
+            FROM (
+                    SELECT rownum rn, bno, title, content, writer, regdate, updatedate
+                    FROM tbl_board
+                    WHERE rownum <= #{pageNum} * #{amount} )
+                    WHERE rn > (#{pageNum} -1) * #{amount}
+                    
+        ]]>
+        </select>
 	
 	<select id="read" resultType="org.zerock.domain.BoardVO">
 		select * from tbl_board where bno = #{bno}

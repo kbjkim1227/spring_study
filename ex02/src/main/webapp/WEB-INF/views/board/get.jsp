@@ -45,12 +45,17 @@
 					<!--<but ton data-oper="modify" class="btn btn-default">Modify</button>
           <button data-oper="list" class="btn btn-info">List</button> -->
 
-					<button data-oper='modify' class="btn btn-default"
+			<%-- 		<button data-oper='modify' class="btn btn-default">Modify</button>
+				       <button data-oper='list' class="btn btn-info">List</button>
+				       <form id ='operForm' action="/board/modify" method="get">
+				       	<input type = 'hidden' id='bno' name='bno' value ='<c:out value="${board.bno}"/>'>
+				       </form> --%>
+					 <button data-oper='modify' class="btn btn-default"
 						onclick="location.href='/board/modify?bno=<c:out value="${board.bno }"/>'">Modify</button>
 					<button type="submit" data-oper="remove" class="btn btn-danger">Remove</button>
 					<button data-oper='list' class="btn btn-info"
 						onclick="location.href='/board/list'">List</button>
-				</form>
+				</form> 
 			</div>
 
 			<!-- /.panel-body -->
@@ -59,6 +64,9 @@
 	</div>
 </div>
 <!-- /.row -->
+
+
+             
 
 <%@include file="../includes/footer.jsp"%>
 
