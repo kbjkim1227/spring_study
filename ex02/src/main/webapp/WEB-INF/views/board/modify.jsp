@@ -95,7 +95,9 @@
              } */
               else if(operation === 'list'){
                 formObj.attr("action", "/board/list").attr("method", "get"); 
-                formObj.empty();             
+                formObj.empty();
+                formObj.append(pageNum);
+                
              }
               
               formObj.submit();

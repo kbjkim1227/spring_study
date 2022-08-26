@@ -1,5 +1,6 @@
 #Tomcat publish data
-#Thu Aug 25 12:13:23 KST 2022
+#Fri Aug 26 15:31:58 KST 2022
+org.eclipse.jst.jee.server\:ex06=C\:\\apache-tomcat-9\\wtpwebapps\\ex06
 org.eclipse.jst.jee.server\:/binary\:C\:\\Users\\505\\.m2\\repository\\org\\springframework\\spring-web\\5.2.7.RELEASE\\spring-web-5.2.7.RELEASE.jar=C\:\\apache-tomcat-9\\wtpwebapps\\ex02\\WEB-INF\\lib\\spring-web-5.2.7.RELEASE.jar
 org.eclipse.jst.jee.server\:interiorshop01=C\:\\apache-tomcat-9\\wtpwebapps\\interiorshop01
 org.eclipse.jst.jee.server\:ex02=C\:\\apache-tomcat-9\\wtpwebapps\\ex02
