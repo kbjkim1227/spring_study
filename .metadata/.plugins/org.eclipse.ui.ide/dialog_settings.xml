@@ -6,6 +6,7 @@
 		<item key="SmartImportRootWizardPage.STORE_NESTED_PROJECTS" value="true"/>
 		<item key="SmartImportRootWizardPage.STORE_CONFIGURE_NATURES" value="true"/>
 		<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+			<item value="D:\bong date\spr_data\home_board"/>
 			<item value="D:\bong date\spr_data\test01"/>
 		</list>
 	</section>
@@ -20,6 +21,9 @@
 		<item key="WizardProjectsImportPage.STORE_CLOSE_CREATED_PROJECTS_ID" value="false"/>
 		<item key="WizardProjectsImportPage.STORE_HIDE_CONFLICTING_PROJECTS_ID" value="false"/>
 		<list key="WizardProjectsImportPage.STORE_DIRECTORIES">
+			<item value="D:\bong date\spr_data\MoonBoard"/>
+			<item value="D:\bong date\spr_data\SABoard-master"/>
+			<item value="D:\bong date\spr_data\SpringBoard\SpringBoard\SpringBoard"/>
 			<item value="D:\bong date\spr_data\assignment_01"/>
 			<item value="D:\bong date\spr_data\interiorshop01"/>
 			<item value="D:\bong date\spr_data\team5_spring"/>
@@ -33,5 +37,7 @@
 		<list key="WizardProjectsImportPage.STORE_ARCHIVES">
 			<item value=""/>
 		</list>
+	</section>
+	<section name="NewWizardAction">
 	</section>
 </section>
