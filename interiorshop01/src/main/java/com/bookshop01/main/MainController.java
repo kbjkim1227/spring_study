@@ -37,9 +37,76 @@ public class MainController extends BaseController {
 		List listBoard = boardService.listBoard();
 		session=request.getSession();
 		session.setAttribute("side_menu", "user");
+		session.setAttribute("listBoard",listBoard);
+		Map<String,List<GoodsVO>> goodsMap=goodsService.listGoods();
+		mav.addObject("goodsMap", goodsMap);
+		//mav.addObject("listBoard",listBoard);
+		return mav;
+	}
+	
+	@RequestMapping(value= "main/Home_Appliances.do" ,method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView HomeAppliances(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		HttpSession session;
+		ModelAndView mav=new ModelAndView();
+		String viewName=(String)request.getAttribute("viewName");
+		mav.setViewName(viewName);
+		
+		List listBoard = boardService.listBoard();
+		session=request.getSession();
+		session.setAttribute("side_menu", "user");
 		Map<String,List<GoodsVO>> goodsMap=goodsService.listGoods();
 		mav.addObject("goodsMap", goodsMap);
 		mav.addObject("listBoard",listBoard);
 		return mav;
 	}
+	
+	@RequestMapping(value= "main/Kitchen.do" ,method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView Kitchen(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		HttpSession session;
+		ModelAndView mav=new ModelAndView();
+		String viewName=(String)request.getAttribute("viewName");
+		mav.setViewName(viewName);
+		
+		List listBoard = boardService.listBoard();
+		session=request.getSession();
+		session.setAttribute("side_menu", "user");
+		Map<String,List<GoodsVO>> goodsMap=goodsService.listGoods();
+		mav.addObject("goodsMap", goodsMap);
+		mav.addObject("listBoard",listBoard);
+		return mav;
+	}
+	
+	@RequestMapping(value= "main/Furniture.do" ,method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView Furniture(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		HttpSession session;
+		ModelAndView mav=new ModelAndView();
+		String viewName=(String)request.getAttribute("viewName");
+		mav.setViewName(viewName);
+		
+		List listBoard = boardService.listBoard();
+		session=request.getSession();
+		session.setAttribute("side_menu", "user");
+		Map<String,List<GoodsVO>> goodsMap=goodsService.listGoods();
+		mav.addObject("goodsMap", goodsMap);
+		mav.addObject("listBoard",listBoard);
+		return mav;
+	}
+	
+	@RequestMapping(value= "main/Housegoods.do" ,method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView Housegoods(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		HttpSession session;
+		ModelAndView mav=new ModelAndView();
+		String viewName=(String)request.getAttribute("viewName");
+		mav.setViewName(viewName);
+		
+		List listBoard = boardService.listBoard();
+		session=request.getSession();
+		session.setAttribute("side_menu", "user");
+		Map<String,List<GoodsVO>> goodsMap=goodsService.listGoods();
+		mav.addObject("goodsMap", goodsMap);
+		mav.addObject("listBoard",listBoard);
+		return mav;
+	}
+	
+	
 }

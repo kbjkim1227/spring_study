@@ -26,6 +26,11 @@ public class AdminGoodsServiceImpl implements AdminGoodsService {
 	@Autowired
 	AdminGoodsDAO adminGoodsDAO;
 	
+	
+
+
+
+
 	@Override
 	public int addNewGoods(Map newGoodsMap) throws Exception{
 		int goods_id = adminGoodsDAO.insertNewGoods(newGoodsMap);
@@ -37,6 +42,16 @@ public class AdminGoodsServiceImpl implements AdminGoodsService {
 		return goods_id;
 	}
 	
+	
+
+	@Override
+	public int removeGoods(String goods_id) throws Exception {
+		return adminGoodsDAO.deleteGoods(goods_id);	
+	}
+
+
+
+
 	@Override
 	public List<GoodsVO> listNewGoods(Map condMap) throws Exception{
 		return adminGoodsDAO.selectNewGoodsList(condMap);

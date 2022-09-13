@@ -12,7 +12,8 @@ import com.bookshop01.goods.vo.ImageFileVO;
 import com.bookshop01.order.vo.OrderVO;
 
 public interface AdminGoodsService {
-	public int  addNewGoods(Map newGoodsMap) throws Exception;
+	public int addNewGoods(Map newGoodsMap) throws Exception;
+	public int removeGoods(String goods_id) throws Exception;
 	public List<GoodsVO> listNewGoods(Map condMap) throws Exception;
 	public Map goodsDetail(int goods_id) throws Exception;
 	public List goodsImageFile(int goods_id) throws Exception;

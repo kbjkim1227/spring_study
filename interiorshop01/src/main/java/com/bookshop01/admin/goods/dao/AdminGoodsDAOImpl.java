@@ -33,6 +33,12 @@ public class AdminGoodsDAOImpl  implements AdminGoodsDAO{
 	}
 		
 	@Override
+	public int deleteGoods(String goods_id) throws DataAccessException {
+		int id = sqlSession.delete("mapper.admin.goods.deleteGoods", goods_id);
+		return id;
+	}
+
+	@Override
 	public List<GoodsVO>selectNewGoodsList(Map condMap) throws DataAccessException {
 		ArrayList<GoodsVO>  goodsList=(ArrayList)sqlSession.selectList("mapper.admin.goods.selectNewGoodsList",condMap);
 		return goodsList;

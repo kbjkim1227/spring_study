@@ -21,11 +21,12 @@
 		<item key="WizardProjectsImportPage.STORE_CLOSE_CREATED_PROJECTS_ID" value="false"/>
 		<item key="WizardProjectsImportPage.STORE_HIDE_CONFLICTING_PROJECTS_ID" value="false"/>
 		<list key="WizardProjectsImportPage.STORE_DIRECTORIES">
+			<item value="C:\Users\505\Documents\카카오톡 받은 파일\ProjectShop\ProjectShop\interiorshop01"/>
+			<item value="D:\bong date\spr_data\interiorshop01"/>
 			<item value="D:\bong date\spr_data\MoonBoard"/>
 			<item value="D:\bong date\spr_data\SABoard-master"/>
 			<item value="D:\bong date\spr_data\SpringBoard\SpringBoard\SpringBoard"/>
 			<item value="D:\bong date\spr_data\assignment_01"/>
-			<item value="D:\bong date\spr_data\interiorshop01"/>
 			<item value="D:\bong date\spr_data\team5_spring"/>
 			<item value="D:\bong date\spr_data\ex02"/>
 			<item value="D:\bong date\spr_data\travelMate-master"/>
