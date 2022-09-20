@@ -7,13 +7,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.myspring.pro30.member.service.MemberService;
@@ -24,7 +24,7 @@ import com.myspring.pro30.member.vo.MemberVO;
 
 @Controller("memberController")
 //@EnableAspectJAutoProxy
-public class MemberControllerImpl   implements MemberController {
+public class MemberControllerImpl extends MultiActionController implements MemberController {
 	@Autowired
 	private MemberService memberService;
 	@Autowired
